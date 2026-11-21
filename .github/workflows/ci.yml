@@ -14,8 +14,8 @@ jobs:
     env:
       DIAN_LLM_PROVIDER: mock
     steps:
-      - uses: actions/checkout@v4
-      - uses: astral-sh/setup-uv@v5
+      - uses: actions/checkout@v7
+      - uses: astral-sh/setup-uv@v10.4.0
       - run: uv sync --python 3.12
       - name: Lint
         run: uv run ruff check .
@@ -23,7 +23,7 @@ jobs:
         run: uv run pytest -q
       - name: Evals (offline, quality gates)
         run: uv run python -m evals.run_evals
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         if: always()
         with:
           name: eval-results
@@ -40,8 +40,8 @@ jobs:
     env:
       ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
     steps:
-      - uses: actions/checkout@v4
-      - uses: astral-sh/setup-uv@v5
+      - uses: actions/checkout@v7
+      - uses: astral-sh/setup-uv@v10.4.0
       - run: uv sync --python 3.12
       - name: Live evals
         if: env.ANTHROPIC_API_KEY != ''
@@ -53,8 +53,8 @@ jobs:
       run:
         working-directory: frontend
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
         with:
           node-version: 22
           cache: npm
