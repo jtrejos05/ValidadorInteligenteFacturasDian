@@ -1,0 +1,42 @@
+[project]
+name = "dian-invoice-validator"
+version = "0.1.0"
+description = "Intelligent validator for Colombian DIAN electronic invoices (UBL 2.1): deterministic rules + LLM where it adds value."
+readme = "../README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "fastapi>=0.115",
+    "uvicorn[standard]>=0.30",
+    "pydantic>=2.8",
+    "pydantic-settings>=2.4",
+    "lxml>=5.3",
+    "python-multipart>=0.0.9",
+    "pypdf>=5.0",
+    "anthropic>=2.12",
+    "mcp>=2.3",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=8.3",
+    "httpx>=0.27",
+    "ruff>=0.6",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+ignore = ["B008"]  # FastAPI's Depends()/File() in defaults is the framework idiom
+
+[tool.ruff.lint.pycodestyle]
+max-line-length = 120  # formatter wraps at 100; long Spanish messages may run a bit over
+
+[tool.ruff.lint.per-file-ignores]
+"app/synthetic.py" = ["E501"]  # inline UBL XML templates

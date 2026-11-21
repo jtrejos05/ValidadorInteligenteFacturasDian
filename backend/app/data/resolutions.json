@@ -1,0 +1,14 @@
+{
+  "18760000001": {
+    "supplier_nit": "900373115",
+    "prefix": "SETP",
+    "technical_key": "fc8eac422eba16e22ffd8c6f94b3f40a6e38162c",
+    "note": "Synthetic resolution used by the generated test invoices."
+  },
+  "18764000002": {
+    "supplier_nit": "860001022",
+    "prefix": "FEV",
+    "technical_key": "693ff6f2a553c3646a063436fd4dd9ded0311471",
+    "note": "Synthetic resolution used by the generated test invoices."
+  }
+}
