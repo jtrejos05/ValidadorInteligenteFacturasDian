@@ -15,7 +15,7 @@ from app.config import Settings, get_settings
 from app.models import Decision, ValidationReport
 from app.pipeline import validate
 from app.samples import Sample, load_samples
-from app.store import ReportStore
+from app.store import ReportStore, make_store
 
 app = FastAPI(
     title="Validador Inteligente de Facturas DIAN",
@@ -34,7 +34,8 @@ ALLOWED_ATTACHMENTS = {"application/pdf", "image/png", "image/jpeg", "image/webp
 
 @lru_cache
 def get_store() -> ReportStore:
-    return ReportStore(get_settings().db_path)
+    settings = get_settings()
+    return make_store(settings.database_url, settings.db_path)
 
 
 @lru_cache

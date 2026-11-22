@@ -2,12 +2,12 @@ import pytest
 from fastapi.testclient import TestClient
 
 from app.main import app, get_store
-from app.store import ReportStore
+from app.store import SQLiteReportStore
 
 
 @pytest.fixture
 def client(tmp_path):
-    store = ReportStore(tmp_path / "test.db")
+    store = SQLiteReportStore(tmp_path / "test.db")
     app.dependency_overrides[get_store] = lambda: store
     yield TestClient(app)
     app.dependency_overrides.clear()

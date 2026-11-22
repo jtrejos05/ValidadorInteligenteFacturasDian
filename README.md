@@ -78,6 +78,19 @@ export ANTHROPIC_API_KEY=sk-ant-...   # or create backend/.env from .env.example
 
 The UI ships **28 sample invoices**: valid ones, ones with each defect sown in, semantic cases, and PDF+XML cases. Pick one from the dropdown or download its XML/PDF.
 
+### Live demo (Vercel)
+
+**https://dian-validator.vercel.app** runs with the mock LLM, so anyone can try it at no cost.
+
+It is deployed as two Vercel projects from this repo:
+
+| Project | Root | What it is |
+|---|---|---|
+| `dian-validator` | `frontend/` | Vite static build. `vercel.json` rewrites `/api/*` to the API, so the app is same-origin and needs no CORS |
+| `dian-validator-api` | `backend/` | FastAPI, auto-detected by Vercel (`app/main.py`), Python 3.12 |
+
+Serverless functions have no persistent disk, so the API stores reports in Postgres when `DATABASE_URL` (or `POSTGRES_URL`) is set, for example Neon from the Vercel Marketplace. Without it, it falls back to SQLite (locally in `data/`, on Vercel in an ephemeral `/tmp`).
+
 ## 4. API
 
 | Method | Path | Description |
